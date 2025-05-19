@@ -1,0 +1,8 @@
+/Developer/
+.gitignore
+/.idea/
+/.venv/
+/venv/
+/code/media_library/
+/code/media.db
+/code/config.toml
