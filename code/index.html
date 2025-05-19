@@ -242,7 +242,7 @@
     // 初始化
     document.addEventListener('DOMContentLoaded', async () => {
         // 加载初始数据
-        await loadAnimateList();
+        await loadAnimeList();
 
         // 搜索框事件监听
         document.getElementById('search').addEventListener('keypress', async (e) => {
@@ -256,14 +256,14 @@
     });
 
     // 加载初始列表
-    async function loadAnimateList() {
-        const response = await fetch('/api/animate_list');
+    async function loadAnimeList() {
+        const response = await fetch('/api/anime_list');
         const data = await response.json();
-        renderAnimateList(data);
+        renderAnimeList(data);
     }
 
     // 渲染分类列表
-    function renderAnimateList(data) {
+    function renderAnimeList(data) {
         const container = document.getElementById('main-content');
         container.innerHTML = '';
 
@@ -288,7 +288,7 @@
     // 创建单个卡片
     function createItemCard(item) {
         return `
-            <div class="item-card" onclick="showDetail(${item.animate_id})">
+            <div class="item-card" onclick="showDetail(${item.anime_id})">
                 <div class="poster-container">
                     <img data-src="${item.poster}" class="poster" alt="${item.name}">
                     <div class="rating-badge">${item.rating}⭐️</div>
@@ -299,8 +299,8 @@
     }
 
     // 显示详情页
-    async function showDetail(animateId) {
-        const response = await fetch(`/api/animate?animate_id=${animateId}`);
+    async function showDetail(animeId) {
+        const response = await fetch(`/api/anime?anime_id=${animeId}`);
         const detail = await response.json();
 
         document.getElementById('detail-content').innerHTML = `
@@ -311,7 +311,7 @@
                 评分：${detail.rating}
                 ${[1,2,3,4,5,6,7,8,9,10].map(n => `
                     <span
-                        onclick="updateRating(${animateId}, ${n})"
+                        onclick="updateRating(${animeId}, ${n})"
                         class="star"
                         style="color: ${n <= detail.rating ? '#ffd700' : '#e0e0e0'}"
                     >
@@ -324,7 +324,7 @@
                 状态：
                 ${['观看中', '待看', '已看', '放弃', '未分类'].map(s => `
                     <span
-                        onclick="updateStatus(${animateId}, '${s}')"
+                        onclick="updateStatus(${animeId}, '${s}')"
                         class="status-option ${s === detail.status ? 'active-status' : ''}"
                         style="${s === detail.status ? 'color:white' : 'color:#34495e'}"
                     >
@@ -339,13 +339,13 @@
 
     // 更新评分
     async function updateRating(id, value) {
-        await fetch(`/api/update?animate_id=${id}&animate_type=rating&value=${value}`, { method: 'POST' });
+        await fetch(`/api/update?anime_id=${id}&anime_type=rating&value=${value}`, { method: 'POST' });
         await showDetail(id);
     }
 
     // 更新状态
     async function updateStatus(id, value) {
-        await fetch(`/api/update?animate_id=${id}&animate_type=status&value=${value}`, { method: 'POST' });
+        await fetch(`/api/update?anime_id=${id}&anime_type=status&value=${value}`, { method: 'POST' });
         await showDetail(id);
     }
 
@@ -373,7 +373,7 @@
     }
     // 关闭详情页
     async function closeDetail() {
-        await loadAnimateList();  // 刷新列表
+        await loadAnimeList();  // 刷新列表
         document.getElementById('detail-page-background').style.display = 'none';
     }
 
@@ -383,7 +383,7 @@
         container.innerHTML = `
             <div class="search-results">
                 ${results.map(item => `
-                    <div class="item-card" onclick="showDetail(${item.animate_id})">
+                    <div class="item-card" onclick="showDetail(${item.anime_id})">
                         <div class="poster-container">
                             <img data-src="${item.poster}" class="poster" alt="${item.name}">
                         </div>

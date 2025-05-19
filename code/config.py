@@ -10,4 +10,7 @@ base_config = {
 if not os.path.exists(path):
     with open(path, 'w', encoding='utf-8') as config_file:
         toml.dump(base_config, config_file)
-animate_config = toml.load(path)
+anime_config = toml.load(path)
+
+# 创建必要文件夹
+os.makedirs("./image/poster", exist_ok=True)
