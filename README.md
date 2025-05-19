@@ -1,6 +1,20 @@
+<div align="center">
+  <p><img src="/code/image/logo.png" width="480" alt="logo"></p>
+</div>
+
+<div align="center">
+
 # Anime Progress - 本地番剧进度管理器
 
-本地番剧进度管理
+_✨ 本地番剧进度管理 ✨_
+
+<a href="./LICENSE">
+    <img src="https://img.shields.io/github/license/SuperGuGuGu/nonebot_plugin_qbittorrent_manager.svg" alt="license">
+</a>
+<img src="https://img.shields.io/badge/python-3.9+-blue.svg" alt="python">
+
+</div>
+
 
 ## 📖 项目简介
 
@@ -18,7 +32,7 @@
 
 ### 环境要求
 
-Python 3.8+
+Python 3.9+
 
 pip 包管理工具
 
@@ -68,10 +82,4 @@ media_library_path = ["./媒体库"]
 host = "0.0.0.0"
 port = 8080
 ```
-
-## 🔍 功能预览
-
-### 媒体库管理界面
-
-### 观看进度面板
 
